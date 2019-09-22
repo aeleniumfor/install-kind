@@ -23,5 +23,4 @@ mv ./kind /usr/local/bin/kind
 
 ## build kubernetes
 kind create cluster
-echo 'export KUBECONFIG="$(kind get kubeconfig-path)"' >> ~/.bash_profile
-source ~/.bash_profile
+export KUBECONFIG="$(kind get kubeconfig-path)"
