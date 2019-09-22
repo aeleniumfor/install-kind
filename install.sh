@@ -22,5 +22,17 @@ chmod +x ./kind
 mv ./kind /usr/local/bin/kind
 
 ## build kubernetes
-kind create cluster
+
+cat <<EOF >> $(pwd)/multi.yml
+kind: Cluster
+apiVersion: kind.sigs.k8s.io/v1alpha3
+nodes:
+- role: control-plane
+
+- role: worker
+- role: worker
+- role: worker
+EOF
+
+kind create cluster --config $(pwd)/multi.yml
 export KUBECONFIG="$(kind get kubeconfig-path)"
